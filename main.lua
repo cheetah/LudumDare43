@@ -190,7 +190,7 @@ function checkBlocks()
   local blocksToDestroy = {}
 
   for i, block in ipairs(array.filter(objs.blocks, function(el) return not el.body:isDestroyed() end)) do
-    for _, contact in pairs(block.body:getContacts()) do
+    for _, contact in pairs(block.body:getContactList()) do
       a, b = contact:getFixtures()
       if a:getCategory() == game.groundCategory or b:getCategory() == game.groundCategory then
         table.insert(blocksToDestroy, block)
@@ -209,7 +209,7 @@ function checkFallingBlock()
     return nil
   end
 
-  for _, contact in pairs(objs.fallingBlock.body:getContacts()) do
+  for _, contact in pairs(objs.fallingBlock.body:getContactList()) do
     a, b = contact:getFixtures()
     if a:getCategory() == game.groundCategory or b:getCategory() == game.groundCategory then
       destroyBlock(objs.fallingBlock)
